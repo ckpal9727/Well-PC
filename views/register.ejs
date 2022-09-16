@@ -7,16 +7,68 @@
     <title>Document</title>
 </head>
 <body>
-    <%- include('partial') %>
-    <h1>Contact</h1>
+    <%- include('header') %>
+    
+   
+   
+
    <form action="/api/user/register" method="post">
-    name: <input type="text" name="name"><br>
-    email: <input type="text" name="email"><br>
-    password: <input type="text" name="password"><br>
-    department: <input type="text" name="department"><br>
-    sem: <input type="text" name="sem"><br>
-    div: <input type="text" name="div"><br>
-    <input type="submit" value="Register">
-   </form>
+    <div class="col-sm-4 my-5">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="name" id="inputEmail3" placeholder="Name">
+            </div>
+          </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail3" name="email" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3"name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Department</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPassword3" name="department" placeholder="Department">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Semester</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPassword3" name="sem" placeholder="Semester">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Division</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPassword3" name="div" placeholder="Division">
+            </div>
+        </div>
+      
+        <!-- <div class="form-group row">
+          <div class="col-sm-2">Checkbox</div>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck1">
+              <label class="form-check-label" for="gridCheck1">
+                Example checkbox
+              </label>
+            </div>
+          </div>
+        </div> -->
+        <div class="form-group row">
+          <div class="col-sm-10 d-flex justify-content-end ">
+            <button type="submit" class="btn btn-primary ">Sign Up</button>
+          </div>
+        </div>
+    </div>
+  </form>
+   <%- include('footer') %>
 </body>
 </html>
