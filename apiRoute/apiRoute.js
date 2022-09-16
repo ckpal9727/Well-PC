@@ -3,16 +3,28 @@ const User=require('../model/User');
 const Computer=require('../model/Computer');
 const crypto=require('crypto-js');
 const jwt=require('jsonwebtoken');
+const cookieParser=require('cookie-parser');
 
 
 
 
+Router.post('/user',(req,res)=>
+{
+    const {isLabAssitant}=req.body
+   
+    // console.log(isLabAssitant)
+    setLabAssistant='setLabAssistant'
+    res.cookie(setLabAssistant,isLabAssitant)
+    res.render('register');
+})
 Router.post('/register',async(req,res)=>
 {
     console.log("I am in register");
-    const {name,email,password,isLabAssistant,department,sem,div}=req.body;
+    const isLabAssistant=req.cookies;
+    const {name,email,password,department,sem,div}=req.body;
+    dataOfBoolean=isLabAssistant.setLabAssistant;
     const encPassword=crypto.AES.encrypt(password,"secret").toString();
-    const user=new User({name:name,email:email,password:encPassword,isLabAssistant:isLabAssistant,department,sem,div}) ;
+    const user=new User({name:name,email:email,password:encPassword,isLabAssistant:dataOfBoolean,department,sem,div}) ;
     try {
     const registerUser=await user.save();
      res.redirect('/login');

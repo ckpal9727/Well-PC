@@ -6,6 +6,7 @@ const jwt=require('jsonwebtoken');
 
 Router.get('/',(req,res)=>
 {
+
     res.render('home');
 })
 Router.get('/register',(req,res)=>

@@ -9,6 +9,12 @@
 <body>
     <%- include('partial') %>
     <h1>This is home page</h1>
+    <form action="api/user/user" method="post">
+        Lab Assitant: <input type="radio" name="isLabAssitant" id="" value="true">
+        Class Represantative: <input type="radio" name="isLabAssitant" value="false" id="">
+        
+        <input type="submit" value="Submit">
+    </form>
    
 </body>
 </html>
