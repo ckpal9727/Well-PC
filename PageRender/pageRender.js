@@ -4,7 +4,7 @@ const Computer=require('../model/Computer');
 const crypto=require('crypto-js');
 const jwt=require('jsonwebtoken');
 
-Router.get('/home',(req,res)=>
+Router.get('/',(req,res)=>
 {
     res.render('home');
 })
