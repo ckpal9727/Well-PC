@@ -11,7 +11,19 @@ Router.get('/',(req,res)=>
 })
 Router.get('/register',(req,res)=>
 {
-    res.render('register');
+    const {isLabAssitant}=req.body
+    if(!isLabAssitant)
+    {
+        res.redirect('/')
+    }else{
+
+        if(isLabAssitant==='false')
+        {
+            res.render('register');
+        }else{
+            res.render('labAssitantRegister');
+        }
+    }
 })
 Router.get('/login',(req,res)=>
 {
