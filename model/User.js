@@ -22,16 +22,19 @@ const userSchema=mongoose.Schema({
     department:
     {
         type:String,
-        require:true
+        require:true,
+        default:"NA"
     },
     sem:{
         type:String,
         required:true,
+        default:"NA"
     },
     div:
     {
         type:String,
-        require:true
+        require:true,
+        default:"NA"
     },
     isLabAssistant:{
         type:Boolean,
