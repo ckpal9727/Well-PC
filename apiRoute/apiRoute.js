@@ -3,6 +3,7 @@ const User=require('../model/User');
 const Computer=require('../model/Computer');
 const crypto=require('crypto-js');
 const jwt=require('jsonwebtoken');
+const verify=require('../verify');
 const cookieParser=require('cookie-parser');
 
 
@@ -15,7 +16,13 @@ Router.post('/user',(req,res)=>
     // console.log(isLabAssitant)
     setLabAssistant='setLabAssistant'
     res.cookie(setLabAssistant,isLabAssitant)
-    res.render('register');
+    if(isLabAssitant==='false')
+    {
+        res.render('register');
+
+    }else{
+        res.render('labAssitantRegister');
+    }
 })
 Router.post('/register',async(req,res)=>
 {
@@ -45,12 +52,30 @@ Router.post('/login',async(req,res)=>
         const originalPassword=crypto.AES.decrypt(existUser.password,"secret").toString(crypto.enc.Utf8);
         console.log(originalPassword);
         if(password===originalPassword){
-           const accesToken=jwt.sign({id:existUser._id,email:existUser.email,department:existUser.department},"secret",{expiresIn:"5d"})
-           res.json({accesToken})
+           const accesToken=jwt.sign({id:existUser._id,name:existUser.name,email:existUser.email,department:existUser.department,sem:existUser.sem,div:existUser.div,isLabAssistant:existUser.isLabAssistant},"secret",{expiresIn:"5d"})
+           const token='accessToken';
+           res.cookie(token,accesToken)
+           res.redirect('profile')
+        //    res.json({accesToken})
         }else{
             res.send("Password is wrong")
         }
     }
+})
+
+Router.get('/profile',verify,async(req,res)=>
+{    
+    const {name,email,department,sem,div,isLabAssistant}=req.user
+    const data={name,email,department,sem,div,isLabAssistant}
+    if(!isLabAssistant)
+    {
+        res.render('CRprofile',data)
+    }else{
+        res.render('labAssistantProfile',data)
+    }
+
+
+    
 })
 
 module.exports=Router;

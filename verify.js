@@ -4,12 +4,13 @@ const jwt=require('jsonwebtoken');
 function verify(req,res,next)
 {
     
-    const authToken=req.headers.token;
+    // console.log("I am in verify")
+    const authToken=req.cookies
     if(authToken)
-    {
-        const token=authToken.split(" ")[1];
-        jwt.verify(token,"secret",(err,User)=>
+    {        
+        jwt.verify(authToken.accessToken,"secret",(err,User)=>
         {
+            // console.log()
             if(err) res.send("Token is invalid ");
             req.user=User;
             next();
