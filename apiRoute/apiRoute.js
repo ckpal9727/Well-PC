@@ -72,10 +72,7 @@ Router.get('/profile',verify,async(req,res)=>
         res.render('CRprofile',data)
     }else{
         res.render('labAssistantProfile',data)
-    }
-
-
-    
+    }    
 })
 
 module.exports=Router;

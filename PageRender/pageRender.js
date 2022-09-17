@@ -6,22 +6,22 @@ const jwt=require('jsonwebtoken');
 
 Router.get('/',(req,res)=>
 {
-
-    res.render('home');
+   res.render('home');
 })
 Router.get('/register',(req,res)=>
 {
     const {isLabAssitant}=req.body
+   
     if(!isLabAssitant)
     {
         res.redirect('/')
     }else{
-
+        console.log(isToken)
         if(isLabAssitant==='false')
         {
-            res.render('register');
+            res.render('register',{isToken:isToken});
         }else{
-            res.render('labAssitantRegister');
+            res.render('labAssitantRegister',{isToken:isToken});
         }
     }
 })
