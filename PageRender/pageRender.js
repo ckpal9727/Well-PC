@@ -1,12 +1,11 @@
 const Router=require('express').Router();
-const User=require('../model/User');
-const Computer=require('../model/Computer');
-const crypto=require('crypto-js');
-const jwt=require('jsonwebtoken');
+const isUser=require('../isUser');
 
-Router.get('/',(req,res)=>
+
+Router.get('/',isUser,(req,res)=>
 {
-   res.render('home');
+    data=req.user
+   res.render('home',{data:data});
 })
 Router.get('/register',(req,res)=>
 {
@@ -16,7 +15,7 @@ Router.get('/register',(req,res)=>
     {
         res.redirect('/')
     }else{
-        console.log(isToken)
+       
         if(isLabAssitant==='false')
         {
             res.render('register',{isToken:isToken});
@@ -25,8 +24,9 @@ Router.get('/register',(req,res)=>
         }
     }
 })
-Router.get('/login',(req,res)=>
+Router.get('/login',isUser,(req,res)=>
 {
+  
     res.render('login')
 })
 

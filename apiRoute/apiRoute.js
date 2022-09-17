@@ -4,7 +4,8 @@ const Computer=require('../model/Computer');
 const crypto=require('crypto-js');
 const jwt=require('jsonwebtoken');
 const verify=require('../verify');
-const cookieParser=require('cookie-parser');
+
+const isUser = require('../isUser');
 
 
 
@@ -65,15 +66,24 @@ Router.post('/login',async(req,res)=>
 
 Router.get('/profile',verify,async(req,res)=>
 {    
-    const {name,email,department,sem,div,isLabAssistant}=req.user
-    const data={name,email,department,sem,div,isLabAssistant}
-    if(!isLabAssistant)
-    {
-        res.render('CRprofile',data)
-    }else{
-        res.render('labAssistantProfile',data)
-    }    
+    
+    if(req.user){
+        const {name,email,department,sem,div,isLabAssistant}=req.user
+        const data={name,email,department,sem,div,isLabAssistant}
+        if(!isLabAssistant)
+        {
+            res.render('CRprofile',{data:data})
+        }else{
+            res.render('labAssistantProfile',{data:data})
+        }     
+    }  
 })
+Router.post('/logout',isUser,(req,res)=>
+{
+    res.clearCookie('accessToken');
+    res.redirect('/')
+})
+
 
 module.exports=Router;
 
